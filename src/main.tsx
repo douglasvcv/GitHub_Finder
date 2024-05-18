@@ -5,10 +5,26 @@ import './index.css'
 
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 
-//Router
+//Pages
+  import Home from './routes/Home.tsx'
+
+  const Router = createBrowserRouter([
+    {
+      path:"/",
+      element: <App/>,
+      children:[
+        {
+          path:"/",
+          element: <Home/>,
+
+        },
+      ]
+    }
+  ])
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={Router}/>
   </React.StrictMode>,
 )
