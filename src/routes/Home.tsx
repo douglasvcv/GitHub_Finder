@@ -2,16 +2,24 @@ import { UserProps } from "../types/user";
 
 
 import Search from "../components/Search";
+import User from "../components/User"
+import Erro from "../components/Erro";
 
 import { useState } from "react";
 
 const Home = ()=>{
 
     const [user, setUser] = useState<UserProps | null>(null)
+    const [erro, setErro] = useState(false)
 
     const loadUser = async(userName:string) =>{
         
         const res = await fetch(`https://api.github.com/users/${userName}`)
+
+        if(res.status === 404){
+            setErro(true)
+            return
+        }
 
         const data = await res.json()
 
@@ -31,7 +39,8 @@ const Home = ()=>{
     return(
         <div>
             <Search loadUser={loadUser}/>
-            {user && <p>user: {user.login}</p>}
+            {user && <User {...user}/>}
+            {erro && <Erro/>}
         </div>
     )
 }
