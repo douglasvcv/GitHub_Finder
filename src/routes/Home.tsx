@@ -18,7 +18,10 @@ const Home = ()=>{
 
         if(res.status === 404){
             setErro(true)
+            setUser(null)
             return
+        }else{
+            setErro(false)
         }
 
         const data = await res.json()

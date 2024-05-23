@@ -1,6 +1,8 @@
+import styles from "./User.module.css"
 
 import { UserProps } from "../types/user";
 import { Link } from "react-router-dom";
+import { MdLocationPin } from "react-icons/md";
 
 function User({
   login,
@@ -10,20 +12,27 @@ function User({
   location,
 }: UserProps) {
   return (
-    <div>
+    <div className={styles.user_container}>
       <div>
         <img src={avatar_url} alt={login} />
         <h1>{login}</h1>
         {location && 
-        <p>{location}</p>}
+        <p>
+        <MdLocationPin/>
+          <span>{location}</span>
+            </p>}
       </div>
-      <div>
+      <div className={styles.number}>
+
+      <div >
         <p>Seguidores:</p>
         <p>{followers}</p>
       </div>
-      <div>
+      <span></span>
+      <div >
         <p>Seguindo:</p>
         <p>{following}</p>
+      </div>
       </div>
     <Link to={`/repos/${login}`}>Ver melhores projetos</Link>
     </div>
